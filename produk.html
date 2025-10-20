@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semua Produk - Toko Anak Ceria</title>
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #e6e8eb;">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="index.html">Toko Anak Ceria</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link active" href="produk.html">Produk</a></li>
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="keranjang.html">Keranjang</a></li>
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spasi agar tidak tertutup navbar -->
+  <div style="margin-top: 90px;"></div>
+
+  <!-- Header -->
+  <section class="text-center mb-4">
+    <h2 class="fw-bold text-primary">Semua Produk</h2>
+    <p class="text-muted">Temukan berbagai produk anak terbaik di sini</p>
+  </section>
+
+  <!-- Fitur pencarian dan filter -->
+  <div class="container mb-4">
+    <div class="row g-2 align-items-center">
+      <div class="col-md-4">
+        <input type="text" id="searchInput" class="form-control" placeholder="Cari produk...">
+      </div>
+      <div class="col-md-3">
+        <select id="kategoriFilter" class="form-select">
+          <option value="">Semua Kategori</option>
+          <option value="mainan">Mainan</option>
+          <option value="pakaian">Pakaian</option>
+          <option value="alat_tulis">Alat Tulis</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select id="sortSelect" class="form-select">
+          <option value="">Urutkan</option>
+          <option value="nama">Nama (A-Z)</option>
+          <option value="hargaAsc">Harga (Termurah)</option>
+          <option value="hargaDesc">Harga (Termahal)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daftar produk -->
+  <div class="container">
+    <div class="row" id="produkContainer">
+      <!-- Contoh Produk -->
+      <div class="col-md-3 mb-4 produk" data-nama="Boneka Teddy" data-harga="75000" data-kategori="mainan">
+        <div class="card shadow-sm">
+          <img src="boneka.jpg" class="card-img-top" alt="Boneka Teddy">
+          <div class="card-body text-center">
+            <h6 class="card-title">Boneka Teddy</h6>
+            <p class="text-muted mb-1">Rp75.000</p>
+            <button class="btn btn-primary btn-sm addToCartBtn">Masukkan Keranjang</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4 produk" data-nama="Baju Anak Perempuan" data-harga="95000" data-kategori="pakaian">
+        <div class="card shadow-sm">
+          <img src="baju anak perempuan.jpg" class="card-img-top" alt="Baju Anak">
+          <div class="card-body text-center">
+            <h6 class="card-title">Baju Anak Perempuan</h6>
+            <p class="text-muted mb-1">Rp95.000</p>
+            <button class="btn btn-primary btn-sm addToCartBtn">Masukkan Keranjang</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4 produk" data-nama="Crayon 12 Warna" data-harga="30000" data-kategori="alat_tulis">
+        <div class="card shadow-sm">
+          <img src="sepeda.jpg" class="card-img-top" alt="Crayon">
+          <div class="card-body text-center">
+            <h6 class="card-title">Sepeda</h6>
+            <p class="text-muted mb-1">Rp30.000</p>
+            <button class="btn btn-primary btn-sm addToCartBtn">Masukkan Keranjang</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4 produk" data-nama="Baju Anak Perempuan" data-harga="95000" data-kategori="mainan">
+        <div class="card shadow-sm">
+          <img src="mainan edukatif anak.jpg" class="card-img-top" alt="Mainan">
+          <div class="card-body text-center">
+            <h6 class="card-title">Mainan Edukatif</h6>
+            <p class="text-muted mb-1">Rp95.000</p>
+            <button class="btn btn-primary btn-sm addToCartBtn">Masukkan Keranjang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white text-center py-3 mt-4">
+    <p class="mb-0">© 2025 Toko Anak Ceria. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const kategoriFilter = document.getElementById('kategoriFilter');
+    const sortSelect = document.getElementById('sortSelect');
+    const produkContainer = document.getElementById('produkContainer');
+
+    function filterProduk() {
+      const searchValue = searchInput.value.toLowerCase();
+      const kategoriValue = kategoriFilter.value;
+
+      document.querySelectorAll('.produk').forEach(p => {
+        const nama = p.dataset.nama.toLowerCase();
+        const kategori = p.dataset.kategori;
+        p.style.display =
+          (nama.includes(searchValue) && (kategoriValue === '' || kategori === kategoriValue))
+            ? 'block' : 'none';
+      });
+    }
+
+    function sortProduk() {
+      const sortValue = sortSelect.value;
+      const produk = Array.from(document.querySelectorAll('.produk'));
+
+      produk.sort((a, b) => {
+        if (sortValue === 'nama')
+          return a.dataset.nama.localeCompare(b.dataset.nama);
+        if (sortValue === 'hargaAsc')
+          return parseInt(a.dataset.harga) - parseInt(b.dataset.harga);
+        if (sortValue === 'hargaDesc')
+          return parseInt(b.dataset.harga) - parseInt(a.dataset.harga);
+        return 0;
+      });
+
+      produk.forEach(p => produkContainer.appendChild(p));
+    }
+
+    searchInput.addEventListener('input', filterProduk);
+    kategoriFilter.addEventListener('change', filterProduk);
+    sortSelect.addEventListener('change', sortProduk);
+  </script>
+
+  <script>
+  document.querySelectorAll('.addToCartBtn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const card = e.target.closest('.produk');
+      const nama = card.dataset.nama;
+      const harga = parseInt(card.dataset.harga);
+      const img = card.querySelector('img').src;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existing = cart.find(item => item.nama === nama);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ nama, harga, qty: 1, img });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = "keranjang.html"; // pindah ke halaman keranjang
+    });
+  });
+</script>
+
+
+  <script src="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

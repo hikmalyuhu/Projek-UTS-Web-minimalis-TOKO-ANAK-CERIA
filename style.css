@@ -1,0 +1,92 @@
+/* style.css */
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #1870c7;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #00bcd4;
+  color: rgb(79, 7, 7);
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+}
+
+
+/* Supaya semua gambar produk rata dan seragam */
+.product-card img {
+  width: 100%;
+  height: 200px;      /* Semua gambar punya tinggi sama */
+  object-fit: cover;  /* Potong gambar agar tetap proporsional */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Supaya card punya tinggi sama */
+.product-card {
+  height: 370px;       /* Atur tinggi card sesuai kebutuhan */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #00bcd4;
+}
+
+#produk {
+  scroll-margin-top:30px; /* jarak dari atas saat di-scroll ke #produk */
+  padding-top: 20px;        /* tambahan jarak visual */
+}
+
+#tentang {
+  scroll-margin-top:30px; /* jarak dari atas saat di-scroll ke #produk */
+  padding-top: 20px;        /* tambahan jarak visual */
+}
+
+#kontak {
+    scroll-margin-top: 30px;
+    padding-top: 20px;
+}
+
+.lihat-semua {
+  display: block;
+  text-align: right;
+  margin-right: 40px; /* jarak dari tepi kanan, bisa disesuaikan */
+  text-decoration: none;
+  color: #000; /* warna teks */
+}
+
+.lihat-semua:hover {
+  color: #007bff; /* warna saat dihover */
+}
+
+.hero1 {
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+.jarak-navbar {
+  scroll-margin-top: 100px;
+  padding-top: 70px;
+  text-align: center;
+  background-color: #00bcd4;
+  font-family:'sans-serif';
+
+}
+
+.body{
+  font-family: 'sans-serif';
+}
+
+.navbar {
+  background-color: #ffb6c1 !important; /* warna navbar tetap */
+}
+
+
+
+

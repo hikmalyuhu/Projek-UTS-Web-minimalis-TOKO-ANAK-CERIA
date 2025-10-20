@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang Belanja - Toko Anak Ceria</title>
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .cart-item img {
+      width: 70px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="index.html">Toko Anak Ceria</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="produk.html">Produk</a></li>
+          <li class="nav-item"><a class="nav-link active" href="keranjang.html">Keranjang</a></li>
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="tampilan1.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spasi agar tidak tertutup navbar -->
+  <div style="margin-top: 90px;"></div>
+
+  <!-- Header -->
+  <div class="container text-center mb-4">
+    <h2 class="fw-bold text-primary">Keranjang Belanja</h2>
+    <p class="text-muted">Lihat dan kelola produk yang telah Anda tambahkan ke keranjang</p>
+  </div>
+
+  <!-- Daftar Keranjang -->
+  <div class="container">
+    <div id="cartContainer" class="bg-white p-4 rounded shadow-sm">
+      <div id="cartItems"></div>
+      <hr>
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold text-primary mb-0">Total: Rp<span id="cartTotal">0</span></h5>
+        <div>
+          <button id="clearCart" class="btn btn-danger me-2">Kosongkan</button>
+          <button id="checkoutBtn" class="btn btn-success">Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="emptyCart" class="text-center text-muted my-5" style="display:none;">
+      <h5>Keranjang Anda masih kosong 😅</h5>
+      <a href="produk.html" class="btn btn-primary mt-3">Lihat Produk</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white text-center py-3 mt-4">
+    <p class="mb-0">© 2025 Toko Anak Ceria. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const cartItemsDiv = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const clearCartBtn = document.getElementById('clearCart');
+    const emptyCart = document.getElementById('emptyCart');
+    const cartContainer = document.getElementById('cartContainer');
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      if (cart.length === 0) {
+        emptyCart.style.display = 'block';
+        cartContainer.style.display = 'none';
+        return;
+      }
+
+      emptyCart.style.display = 'none';
+      cartContainer.style.display = 'block';
+
+      cartItemsDiv.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.harga * item.qty;
+        total += subtotal;
+
+        cartItemsDiv.innerHTML += `
+          <div class="cart-item d-flex align-items-center justify-content-between border-bottom py-2">
+            <div class="d-flex align-items-center">
+              <img src="${item.img}" alt="${item.nama}" class="me-3">
+              <div>
+                <h6 class="mb-0">${item.nama}</h6>
+                <small class="text-muted">Rp${item.harga.toLocaleString('id-ID')}</small><br>
+                <div class="mt-1">
+                  <button class="btn btn-sm btn-outline-primary me-2" onclick="changeQty(${index}, -1)">-</button>
+                  <span>${item.qty}</span>
+                  <button class="btn btn-sm btn-outline-primary ms-2" onclick="changeQty(${index}, 1)">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="text-end">
+              <p class="mb-1 fw-bold">Rp${subtotal.toLocaleString('id-ID')}</p>
+              <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">Hapus</button>
+            </div>
+          </div>
+        `;
+      });
+
+      cartTotal.textContent = total.toLocaleString('id-ID');
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function changeQty(index, change) {
+      cart[index].qty += change;
+      if (cart[index].qty <= 0) cart.splice(index, 1);
+      renderCart();
+    }
+
+    clearCartBtn.addEventListener('click', () => {
+      if (confirm("Kosongkan keranjang?")) {
+        cart = [];
+        localStorage.removeItem('cart');
+        renderCart();
+      }
+    });
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+    window.location.href = "chekout.html";
+    });
+
+
+    renderCart();
+  </script>
+
+  <script src="bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
